@@ -1,4 +1,4 @@
-import { useState, forwardRef , useRef} from 'react'
+import { useState, forwardRef , useRef, useEffect} from 'react'
 import logo from './logo.svg'
 import './App.css'
 import List from './components/list'
@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App w-600px ">
       {/* <Test ref={refChange}/> */}
-      <List />
+      {/* <List />
       <Routes 
         routes={[
           {
@@ -29,12 +29,28 @@ function App() {
         ]}
       />
       <Link href='/home'>home</Link>
-        <Link href='/about'>about</Link>
+        <Link href='/about'>about</Link> */}
 
+
+        <Counter />
     </div>
   )
 }
 
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  const [name, setName] = useState('siry')
+  useEffect(() => {
+    console.log('first')
+  })
+  return(
+    <div>
+      {count}
+      <button onClick={() => setCount(count + 1)}>增加</button>
+    </div>
+  )
+}
 
 const Test = forwardRef((props, ref: any) => {
   return (
