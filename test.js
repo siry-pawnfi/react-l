@@ -7,9 +7,14 @@ window.addEventListener('click', onClick)
 
 function onClick() {
   show.innerHTML = ++count
-  for(let i=0;i<10; i++) {
+  for(let i=0;i<1; i++) {
     log()
   }
+  console.log('asd')
+  console.log('asd')
+  console.log('asd')
+  console.log('asd')
+
 }
 
 function log() {

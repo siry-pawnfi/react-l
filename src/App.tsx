@@ -1,6 +1,4 @@
-import { useState, forwardRef , useRef, useEffect} from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { useState, forwardRef , useRef, useEffect} from 'react'
 import List from './components/list'
 import Routes , { Link, navigate} from './components/routes'
 
@@ -32,13 +30,20 @@ function App() {
         <Link href='/about'>about</Link> */}
 
 
-        <Counter />
+        <Counter  render={(name: any) => (
+          <div>{name || '这人很懒没没有输入名字....'}</div>
+        )}/>
+
+        <Father>
+            <Child/>
+        </Father>
+
     </div>
   )
 }
 
 
-function Counter() {
+function Counter(props: any) {
   const [count, setCount] = useState(0)
   const [name, setName] = useState('siry')
   useEffect(() => {
@@ -48,14 +53,39 @@ function Counter() {
     <div>
       {count}
       <button onClick={() => setCount(count + 1)}>增加</button>
+      {
+        props.render('siry')
+      }
+
+      <Test />
     </div>
   )
 }
 
-const Test = forwardRef((props, ref: any) => {
+const Test = React.memo(() => {
+  useEffect(() => {
+    console.log('Test渲染')
+  })
   return (
-    <div ref={ref}>222</div>
+    <div  className="sssssssssssss">222</div>
   )
 })
+
+function Child() {
+  console.log('Child');
+  return <div>Child</div>;
+}
+    
+    
+function Father(props:any) {
+  const [num, setNum] = React.useState(0);
+  return (
+    <div onClick={() => {setNum(num + 1)}}>
+      {num}
+      {props.children}
+    </div>
+  );
+}
+    
 
 export default App
